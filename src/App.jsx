@@ -78,13 +78,19 @@ function App() {
 
   function deleteBook(e) {
     const dataIndex = e.target.getAttribute('data-index')
-    const updatebooks = books.filter((item, index) => item.id != dataIndex)
+    const updatebooks = books.filter((item) => item.id != dataIndex)
     setBooks(updatebooks)
   }
   function modifyBook(e) {
     const dataIndex = e.target.getAttribute('data-index')
-    const updatebooks = books.filter((book, index) => dataIndex != index)
-    const modifyBook = prompt('change name')
+    const updatebooks = books.filter((item) => item.id != dataIndex)
+    const modifyBook = {
+      id: books.find((item) => item.id == dataIndex).id,
+      title: prompt(`modify title:${books.find((item) => item.id == dataIndex).title}`),
+      author: prompt(`modify author: ${books.find((item) => item.id == dataIndex).author}`),
+      state: prompt(`modify state: ${books.find((item) => item.id == dataIndex).state}`)
+    }
+
     const modifyList = [modifyBook, ...updatebooks]
     setBooks(modifyList)
   }
